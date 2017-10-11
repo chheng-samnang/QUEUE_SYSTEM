@@ -15,6 +15,10 @@ public partial class counter_Default : System.Web.UI.Page
     {        
         string code = Request["code"] != null ? Request["code"] : "";
         string com = Request["com"] != null ? Request["com"] : "";
+        if(Session["counterNumber"]==null)
+        {
+            return;
+        }
         if (!IsPostBack)
         {
             if (code == "" && com == "")
@@ -112,7 +116,7 @@ public partial class counter_Default : System.Web.UI.Page
         if (id == "")
         {
             var query = (from q in dc.tbl_tickets
-                         where q.tkt_status == "pending" && q.cnt_id == null
+                         where q.tkt_status == "pending" && q.cnt_id == 0
                          select q).FirstOrDefault();
             return query;
         }
@@ -148,9 +152,18 @@ public partial class counter_Default : System.Web.UI.Page
                 query[0].cnt_id = Convert.ToByte(Session["conterID"]);
                 dc.SubmitChanges();
                 var query2 = loadData();
-                lblTktCode.Text = query2.tkt_code;
-                occupyTicket(cnt_id);
-                btnCall_Click(sender, e);
+                if (query2 != null)
+                {
+                    lblTktCode.Text = query2.tkt_code;
+                    occupyTicket(cnt_id);
+                    btnCall_Click(sender, e);
+                }
+                else
+                {
+                    msg = "There is no more ticket to call.";
+                    lblMsg.Text = msg;
+                }
+                
             }
             else
             {
@@ -199,6 +212,7 @@ public partial class counter_Default : System.Web.UI.Page
         {
             string[] numberArray = new string[no.Length];
             int counter = 0;
+            lblTktCode.Text = no;
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\QUEUE_SYSTEM\counter\sound\call.wav");
             player.Play();
             System.Threading.Thread.Sleep(4500);

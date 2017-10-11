@@ -1,71 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="queue_system_db" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=TOSHIBA\SQLEXPRESS;Initial Catalog=queue_system_db;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="queue_system_dbConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.tbl_customer" Member="tbl_customers">
-    <Type Name="tbl_customer">
-      <Column Name="cus_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="cus_code" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_ticket" Member="tbl_tickets">
-    <Type Name="tbl_ticket">
-      <Column Name="tkt_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="serv_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="cus_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="cnt_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="tkt_code" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
-      <Column Name="tkt_status" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
-      <Column Name="tkt_desc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="tkt_hold_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="date_crea" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_user" Member="tbl_users">
-    <Type Name="tbl_user">
-      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="user_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="user_password" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="user_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="user_status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="user_desc" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="user_crea" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="date_crea" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="user_updt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="date_updt" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_services" Member="tbl_services">
-    <Type Name="tbl_service">
-      <Column Name="serv_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="serv_name" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="serv_name_kh" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="serv_code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="serv_desc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="serv_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="serv_type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="user_updt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="date_updt" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-    </Type>
-  </Table>
+  <Connection Mode="WebSettings" ConnectionString="Data Source=T430;Initial Catalog=queue_system_db;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="queue_system_dbConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_counter" Member="tbl_counters">
     <Type Name="tbl_counter">
       <Column Name="cnt_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="user_name" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="user_password" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="serv_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="cnt_no" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="cnt_no" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="cnt_desc" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="cnt_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cnt_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="cnt_position" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="user_updt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="date_updt" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_customer" Member="tbl_customers">
+    <Type Name="tbl_customer">
+      <Column Name="cus_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cus_code" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_service" Member="tbl_services">
+    <Type Name="tbl_service">
+      <Column Name="serv_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="serv_name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="serv_name_kh" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="serv_code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="serv_desc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="serv_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="serv_type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="user_updt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="date_updt" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_ticket" Member="tbl_tickets">
+    <Type Name="tbl_ticket">
+      <Column Name="tkt_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="serv_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cus_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cnt_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tkt_code" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="tkt_status" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
+      <Column Name="tkt_desc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tkt_hold_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_user" Member="tbl_users">
+    <Type Name="tbl_user">
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_password" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="user_status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="user_desc" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="user_crea" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="user_updt" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="date_updt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

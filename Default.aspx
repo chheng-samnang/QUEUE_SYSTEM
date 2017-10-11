@@ -34,7 +34,7 @@
             </div>
         </div>
         <div id="print" style="display:none">           
-            <div style="float:left"><img src="img/logo.png" style="width:60px;"/></div>
+            <div style="float:left"><img src="counter/img/logo.png" style="width:60px;"/></div>
             <div style="float:left;text-align:center;margin-left:10px;">
                 <b style="font-size:26px">Amppil Technology</b><br /><small>We Bring Technology in You Business</small>
             </div>

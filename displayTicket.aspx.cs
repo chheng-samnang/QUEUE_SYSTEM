@@ -14,7 +14,7 @@ public partial class displayTicket : System.Web.UI.Page
         {
             var query = (from q in dc.tbl_tickets
                          join q2 in dc.tbl_counters on q.cnt_id equals q2.cnt_id
-                         where q.cnt_id != null
+                         where q.cnt_id != 0
                          orderby q.tkt_code descending
                          select new {tkt_code = q.tkt_code,cnt_id=q.cnt_id,cnt_pos=q2.cnt_position }).Take(4).ToList();
             if(query.Count==1)

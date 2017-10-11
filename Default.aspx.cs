@@ -23,7 +23,7 @@ public partial class _Default : System.Web.UI.Page
             tkt.tkt_code = code;
             tkt.tkt_status = "pending";
             tkt.user_crea = Convert.ToString(Session["userLogin"]);
-            tkt.date_crea = DateTime.Now.ToString();
+            tkt.date_crea = DateTime.Now;
             dc.tbl_tickets.InsertOnSubmit(tkt);
             dc.SubmitChanges();            
             Response.Redirect("Default.aspx");
