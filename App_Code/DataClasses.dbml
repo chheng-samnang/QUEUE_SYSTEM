@@ -14,6 +14,47 @@
       <Column Name="date_crea" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="user_updt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="date_updt" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+<<<<<<< HEAD
+=======
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_customer" Member="tbl_customers">
+    <Type Name="tbl_customer">
+      <Column Name="cus_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cus_code" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_service" Member="tbl_services">
+    <Type Name="tbl_service">
+      <Column Name="serv_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="serv_name" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="serv_name_kh" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="serv_code" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="serv_desc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="serv_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="serv_type" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="user_updt" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="date_updt" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_ticket" Member="tbl_tickets">
+    <Type Name="tbl_ticket">
+      <Column Name="tkt_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="serv_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cus_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cnt_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tkt_code" Type="System.String" DbType="NVarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="tkt_status" Type="System.String" DbType="NVarChar(35)" CanBeNull="true" />
+      <Column Name="tkt_desc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="user_crea" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tkt_hold_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
     </Type>
   </Table>
   <Table Name="dbo.tbl_user" Member="tbl_users">
@@ -28,6 +69,7 @@
       <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="user_updt" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="date_updt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+<<<<<<< HEAD
     </Type>
   </Table>
   <Table Name="dbo.tbl_customer" Member="tbl_customers">
@@ -66,6 +108,8 @@
       <Column Name="tkt_hold_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="date_crea" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="time_crea" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+=======
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
     </Type>
   </Table>
 </Database>

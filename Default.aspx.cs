@@ -21,9 +21,14 @@ public partial class _Default : System.Web.UI.Page
             //tkt.cus_id = 1;
             tkt.tkt_code = code;
             tkt.tkt_status = "pending";
+<<<<<<< HEAD
             //tkt.user_crea = Convert.ToString(Session["userLogin"]);
             tkt.date_crea = date.Date;
             //tkt.time_crea = TimeSpan.Parse(DateTime.Now.ToShortTimeString());
+=======
+            tkt.user_crea = Convert.ToString(Session["userLogin"]);
+            tkt.date_crea = DateTime.Now;
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
             dc.tbl_tickets.InsertOnSubmit(tkt);
             dc.SubmitChanges();
             Response.Redirect("Default.aspx");           

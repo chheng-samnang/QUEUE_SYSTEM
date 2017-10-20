@@ -84,10 +84,27 @@
                     </div>                                                                                                                                 
                 </div>
             </div>
+<<<<<<< HEAD
         </div>                     
         
         
                         
+=======
+        </div>
+        <div id="print" style="display:none">           
+            <div style="float:left"><img src="counter/img/logo.png" style="width:60px;"/></div>
+            <div style="float:left;text-align:center;margin-left:10px;">
+                <b style="font-size:26px">Amppil Technology</b><br /><small>We Bring Technology in You Business</small>
+            </div>
+            <div style="clear:both"></div>                                                                                                                              
+            <div style="text-align:center">
+                <b style="font-size:100px;"><% Response.Write(Session["number"]);%></b>
+                <p><% Response.Write(DateTime.Now.ToString()); %></p>
+                <p>Please wait to be serviced</p>                                    
+            </div>                                                                                                                                                                     
+        </div>
+        <%--<asp:Label ID="lblTicket" runat="server"></asp:Label>--%>
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
     </div>   
 
     <script>

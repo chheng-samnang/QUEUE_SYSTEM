@@ -14,8 +14,13 @@ public partial class displayTicket : System.Web.UI.Page
         {
             var query = (from q in dc.tbl_tickets
                          join q2 in dc.tbl_counters on q.cnt_id equals q2.cnt_id
+<<<<<<< HEAD
                          where q.cnt_id != null
                          orderby q.time_crea descending
+=======
+                         where q.cnt_id != 0
+                         orderby q.tkt_code descending
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
                          select new {tkt_code = q.tkt_code,cnt_id=q.cnt_id,cnt_pos=q2.cnt_position }).Take(4).ToList();
             if(query.Count==1)
             {

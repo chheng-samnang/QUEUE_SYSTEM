@@ -15,8 +15,16 @@ public partial class counter_Default : System.Web.UI.Page
     {        
         string code = Request["code"] != null ? Request["code"] : "";
         string com = Request["com"] != null ? Request["com"] : "";
+<<<<<<< HEAD
         Boolean isLogin = Session["counterID"] != null ? true : false;
         if(isLogin)
+=======
+        if(Session["counterNumber"]==null)
+        {
+            return;
+        }
+        if (!IsPostBack)
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
         {
             int cnt_id = int.Parse(Session["counterID"].ToString());
         }
@@ -122,7 +130,11 @@ public partial class counter_Default : System.Web.UI.Page
         if (id == "")
         {
             var query = (from q in dc.tbl_tickets
+<<<<<<< HEAD
                          where q.tkt_status == "pending" && q.cnt_id == null && q.serv_id==srv_id
+=======
+                         where q.tkt_status == "pending" && q.cnt_id == 0
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
                          select q).FirstOrDefault();
             return query;
         }
@@ -160,10 +172,17 @@ public partial class counter_Default : System.Web.UI.Page
                 query[0].cnt_id = int.Parse(Session["counterID"].ToString());
                 dc.SubmitChanges();
                 var query2 = loadData();
+<<<<<<< HEAD
                 if(query2!=null)
                 {
                     lblTktCode.Text = query2.tkt_code;
                     occupyTicket(int.Parse(Session["counterID"].ToString()));
+=======
+                if (query2 != null)
+                {
+                    lblTktCode.Text = query2.tkt_code;
+                    occupyTicket(cnt_id);
+>>>>>>> 59f82f6f7d68523d86389e225ccc93cb7e0868ed
                     btnCall_Click(sender, e);
                 }
                 else
@@ -221,6 +240,7 @@ public partial class counter_Default : System.Web.UI.Page
         {
             string[] numberArray = new string[no.Length];
             int counter = 0;
+            lblTktCode.Text = no;
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\QUEUE_SYSTEM\counter\sound\call.wav");
             player.Play();
             System.Threading.Thread.Sleep(4500);
