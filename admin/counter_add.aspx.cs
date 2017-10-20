@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Security.Cryptography;
+using System.Text;
 
 public partial class admin_counter_add : System.Web.UI.Page
 {
@@ -34,7 +36,7 @@ public partial class admin_counter_add : System.Web.UI.Page
         tbl_counter cnt = new tbl_counter();
         cnt.cnt_no = txt_counter_number.Text;
         cnt.user_name = txt_username.Text;
-        cnt.user_password = txt_password.Text;
+        cnt.user_password = encrypt(txt_password.Text);
         cnt.serv_id = Convert.ToInt16(ddl_service.SelectedValue);
         cnt.cnt_position = txt_position.Text;
         cnt.cnt_status = Convert.ToByte(ddlStatus.SelectedValue);
@@ -44,5 +46,17 @@ public partial class admin_counter_add : System.Web.UI.Page
         db.tbl_counters.InsertOnSubmit(cnt);
         db.SubmitChanges();
         Response.Redirect("counter.aspx");
+    }
+    private string encrypt(string str)
+    {
+        string _result = string.Empty;
+        char[] temp = str.ToCharArray();
+        foreach (var _singleChar in temp)
+        {
+            var i = (int)_singleChar;
+            i = i - 2;
+            _result += (char)i;
+        }
+        return _result;
     }
 }

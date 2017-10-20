@@ -38,6 +38,7 @@
         }
         .arrow{
             width:50px;
+            margin-right:200px;
         }
     </style>
 </asp:Content>
@@ -80,7 +81,7 @@
                                  <asp:Label ID="lblTktCode" runat="server" Text=""></asp:Label>
                              </div>
                              <asp:Label ID="lblCounter" runat="server" Text="" Font-Size="80px"></asp:Label><br />
-                             <asp:Image ID="Image4" style="width:100px;" CssClass="arrow" runat="server" ImageUrl="" />
+                             <asp:Image ID="Image4" style="width:100px;margin-right:450px;" CssClass="arrow" runat="server" ImageUrl="" />
                          </div>
                     </div>
                 </div>

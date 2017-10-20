@@ -22,8 +22,7 @@ public partial class admin_user_edit : System.Web.UI.Page
                             select f;
                 foreach (var i in query)
                 {
-                    txt_username.Text = i.user_name;
-                    txt_user_code.Text = i.user_code;
+                    txt_username.Text = i.user_name;                    
                     ddlStatus.SelectedValue = i.user_status.ToString();                    
                     desc.Text = i.user_desc;
                 }
@@ -38,8 +37,7 @@ public partial class admin_user_edit : System.Web.UI.Page
                     select f;
         foreach (var i in query)
         {
-            i.user_name = txt_username.Text;
-            i.user_code = txt_user_code.Text;
+            i.user_name = txt_username.Text;            
             i.user_status = Convert.ToByte(ddlStatus.SelectedValue);
             i.user_desc = desc.Text;
             i.user_updt = Convert.ToString(Session["userLogin"]);

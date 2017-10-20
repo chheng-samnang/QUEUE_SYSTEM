@@ -29,25 +29,25 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 	
   #region Extensibility Method Definitions
   partial void OnCreated();
-  partial void Inserttbl_customer(tbl_customer instance);
-  partial void Updatetbl_customer(tbl_customer instance);
-  partial void Deletetbl_customer(tbl_customer instance);
-  partial void Inserttbl_ticket(tbl_ticket instance);
-  partial void Updatetbl_ticket(tbl_ticket instance);
-  partial void Deletetbl_ticket(tbl_ticket instance);
-  partial void Inserttbl_user(tbl_user instance);
-  partial void Updatetbl_user(tbl_user instance);
-  partial void Deletetbl_user(tbl_user instance);
-  partial void Inserttbl_service(tbl_service instance);
-  partial void Updatetbl_service(tbl_service instance);
-  partial void Deletetbl_service(tbl_service instance);
   partial void Inserttbl_counter(tbl_counter instance);
   partial void Updatetbl_counter(tbl_counter instance);
   partial void Deletetbl_counter(tbl_counter instance);
+  partial void Inserttbl_user(tbl_user instance);
+  partial void Updatetbl_user(tbl_user instance);
+  partial void Deletetbl_user(tbl_user instance);
+  partial void Inserttbl_customer(tbl_customer instance);
+  partial void Updatetbl_customer(tbl_customer instance);
+  partial void Deletetbl_customer(tbl_customer instance);
+  partial void Inserttbl_service(tbl_service instance);
+  partial void Updatetbl_service(tbl_service instance);
+  partial void Deletetbl_service(tbl_service instance);
+  partial void Inserttbl_ticket(tbl_ticket instance);
+  partial void Updatetbl_ticket(tbl_ticket instance);
+  partial void Deletetbl_ticket(tbl_ticket instance);
   #endregion
 	
 	public DataClassesDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["queue_system_dbConnectionString1"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["queue_system_dbConnectionString"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -76,19 +76,11 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		OnCreated();
 	}
 	
-	public System.Data.Linq.Table<tbl_customer> tbl_customers
+	public System.Data.Linq.Table<tbl_counter> tbl_counters
 	{
 		get
 		{
-			return this.GetTable<tbl_customer>();
-		}
-	}
-	
-	public System.Data.Linq.Table<tbl_ticket> tbl_tickets
-	{
-		get
-		{
-			return this.GetTable<tbl_ticket>();
+			return this.GetTable<tbl_counter>();
 		}
 	}
 	
@@ -100,6 +92,14 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
+	public System.Data.Linq.Table<tbl_customer> tbl_customers
+	{
+		get
+		{
+			return this.GetTable<tbl_customer>();
+		}
+	}
+	
 	public System.Data.Linq.Table<tbl_service> tbl_services
 	{
 		get
@@ -108,11 +108,615 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<tbl_counter> tbl_counters
+	public System.Data.Linq.Table<tbl_ticket> tbl_tickets
 	{
 		get
 		{
-			return this.GetTable<tbl_counter>();
+			return this.GetTable<tbl_ticket>();
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_counter")]
+public partial class tbl_counter : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _cnt_id;
+	
+	private string _user_name;
+	
+	private string _user_password;
+	
+	private int _serv_id;
+	
+	private string _cnt_no;
+	
+	private string _cnt_desc;
+	
+	private int _cnt_status;
+	
+	private string _cnt_position;
+	
+	private string _user_crea;
+	
+	private System.DateTime _date_crea;
+	
+	private string _user_updt;
+	
+	private System.Nullable<System.DateTime> _date_updt;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncnt_idChanging(int value);
+    partial void Oncnt_idChanged();
+    partial void Onuser_nameChanging(string value);
+    partial void Onuser_nameChanged();
+    partial void Onuser_passwordChanging(string value);
+    partial void Onuser_passwordChanged();
+    partial void Onserv_idChanging(int value);
+    partial void Onserv_idChanged();
+    partial void Oncnt_noChanging(string value);
+    partial void Oncnt_noChanged();
+    partial void Oncnt_descChanging(string value);
+    partial void Oncnt_descChanged();
+    partial void Oncnt_statusChanging(int value);
+    partial void Oncnt_statusChanged();
+    partial void Oncnt_positionChanging(string value);
+    partial void Oncnt_positionChanged();
+    partial void Onuser_creaChanging(string value);
+    partial void Onuser_creaChanged();
+    partial void Ondate_creaChanging(System.DateTime value);
+    partial void Ondate_creaChanged();
+    partial void Onuser_updtChanging(string value);
+    partial void Onuser_updtChanged();
+    partial void Ondate_updtChanging(System.Nullable<System.DateTime> value);
+    partial void Ondate_updtChanged();
+    #endregion
+	
+	public tbl_counter()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int cnt_id
+	{
+		get
+		{
+			return this._cnt_id;
+		}
+		set
+		{
+			if ((this._cnt_id != value))
+			{
+				this.Oncnt_idChanging(value);
+				this.SendPropertyChanging();
+				this._cnt_id = value;
+				this.SendPropertyChanged("cnt_id");
+				this.Oncnt_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_name", DbType="NChar(100) NOT NULL", CanBeNull=false)]
+	public string user_name
+	{
+		get
+		{
+			return this._user_name;
+		}
+		set
+		{
+			if ((this._user_name != value))
+			{
+				this.Onuser_nameChanging(value);
+				this.SendPropertyChanging();
+				this._user_name = value;
+				this.SendPropertyChanged("user_name");
+				this.Onuser_nameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_password", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+	public string user_password
+	{
+		get
+		{
+			return this._user_password;
+		}
+		set
+		{
+			if ((this._user_password != value))
+			{
+				this.Onuser_passwordChanging(value);
+				this.SendPropertyChanging();
+				this._user_password = value;
+				this.SendPropertyChanged("user_password");
+				this.Onuser_passwordChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_id", DbType="Int NOT NULL")]
+	public int serv_id
+	{
+		get
+		{
+			return this._serv_id;
+		}
+		set
+		{
+			if ((this._serv_id != value))
+			{
+				this.Onserv_idChanging(value);
+				this.SendPropertyChanging();
+				this._serv_id = value;
+				this.SendPropertyChanged("serv_id");
+				this.Onserv_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_no", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+	public string cnt_no
+	{
+		get
+		{
+			return this._cnt_no;
+		}
+		set
+		{
+			if ((this._cnt_no != value))
+			{
+				this.Oncnt_noChanging(value);
+				this.SendPropertyChanging();
+				this._cnt_no = value;
+				this.SendPropertyChanged("cnt_no");
+				this.Oncnt_noChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_desc", DbType="NVarChar(250)")]
+	public string cnt_desc
+	{
+		get
+		{
+			return this._cnt_desc;
+		}
+		set
+		{
+			if ((this._cnt_desc != value))
+			{
+				this.Oncnt_descChanging(value);
+				this.SendPropertyChanging();
+				this._cnt_desc = value;
+				this.SendPropertyChanged("cnt_desc");
+				this.Oncnt_descChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_status", DbType="Int NOT NULL")]
+	public int cnt_status
+	{
+		get
+		{
+			return this._cnt_status;
+		}
+		set
+		{
+			if ((this._cnt_status != value))
+			{
+				this.Oncnt_statusChanging(value);
+				this.SendPropertyChanging();
+				this._cnt_status = value;
+				this.SendPropertyChanged("cnt_status");
+				this.Oncnt_statusChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_position", DbType="NVarChar(50)")]
+	public string cnt_position
+	{
+		get
+		{
+			return this._cnt_position;
+		}
+		set
+		{
+			if ((this._cnt_position != value))
+			{
+				this.Oncnt_positionChanging(value);
+				this.SendPropertyChanging();
+				this._cnt_position = value;
+				this.SendPropertyChanged("cnt_position");
+				this.Oncnt_positionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_crea", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string user_crea
+	{
+		get
+		{
+			return this._user_crea;
+		}
+		set
+		{
+			if ((this._user_crea != value))
+			{
+				this.Onuser_creaChanging(value);
+				this.SendPropertyChanging();
+				this._user_crea = value;
+				this.SendPropertyChanged("user_crea");
+				this.Onuser_creaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date NOT NULL")]
+	public System.DateTime date_crea
+	{
+		get
+		{
+			return this._date_crea;
+		}
+		set
+		{
+			if ((this._date_crea != value))
+			{
+				this.Ondate_creaChanging(value);
+				this.SendPropertyChanging();
+				this._date_crea = value;
+				this.SendPropertyChanged("date_crea");
+				this.Ondate_creaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_updt", DbType="NVarChar(50)")]
+	public string user_updt
+	{
+		get
+		{
+			return this._user_updt;
+		}
+		set
+		{
+			if ((this._user_updt != value))
+			{
+				this.Onuser_updtChanging(value);
+				this.SendPropertyChanging();
+				this._user_updt = value;
+				this.SendPropertyChanged("user_updt");
+				this.Onuser_updtChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_updt", DbType="Date")]
+	public System.Nullable<System.DateTime> date_updt
+	{
+		get
+		{
+			return this._date_updt;
+		}
+		set
+		{
+			if ((this._date_updt != value))
+			{
+				this.Ondate_updtChanging(value);
+				this.SendPropertyChanging();
+				this._date_updt = value;
+				this.SendPropertyChanged("date_updt");
+				this.Ondate_updtChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_user")]
+public partial class tbl_user : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _user_id;
+	
+	private string _user_code;
+	
+	private string _user_name;
+	
+	private string _user_password;
+	
+	private byte _user_status;
+	
+	private string _user_desc;
+	
+	private string _user_crea;
+	
+	private System.Nullable<System.DateTime> _date_crea;
+	
+	private string _user_updt;
+	
+	private System.DateTime _date_updt;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void Onuser_codeChanging(string value);
+    partial void Onuser_codeChanged();
+    partial void Onuser_nameChanging(string value);
+    partial void Onuser_nameChanged();
+    partial void Onuser_passwordChanging(string value);
+    partial void Onuser_passwordChanged();
+    partial void Onuser_statusChanging(byte value);
+    partial void Onuser_statusChanged();
+    partial void Onuser_descChanging(string value);
+    partial void Onuser_descChanged();
+    partial void Onuser_creaChanging(string value);
+    partial void Onuser_creaChanged();
+    partial void Ondate_creaChanging(System.Nullable<System.DateTime> value);
+    partial void Ondate_creaChanged();
+    partial void Onuser_updtChanging(string value);
+    partial void Onuser_updtChanged();
+    partial void Ondate_updtChanging(System.DateTime value);
+    partial void Ondate_updtChanged();
+    #endregion
+	
+	public tbl_user()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int user_id
+	{
+		get
+		{
+			return this._user_id;
+		}
+		set
+		{
+			if ((this._user_id != value))
+			{
+				this.Onuser_idChanging(value);
+				this.SendPropertyChanging();
+				this._user_id = value;
+				this.SendPropertyChanged("user_id");
+				this.Onuser_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string user_code
+	{
+		get
+		{
+			return this._user_code;
+		}
+		set
+		{
+			if ((this._user_code != value))
+			{
+				this.Onuser_codeChanging(value);
+				this.SendPropertyChanging();
+				this._user_code = value;
+				this.SendPropertyChanged("user_code");
+				this.Onuser_codeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string user_name
+	{
+		get
+		{
+			return this._user_name;
+		}
+		set
+		{
+			if ((this._user_name != value))
+			{
+				this.Onuser_nameChanging(value);
+				this.SendPropertyChanging();
+				this._user_name = value;
+				this.SendPropertyChanged("user_name");
+				this.Onuser_nameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_password", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+	public string user_password
+	{
+		get
+		{
+			return this._user_password;
+		}
+		set
+		{
+			if ((this._user_password != value))
+			{
+				this.Onuser_passwordChanging(value);
+				this.SendPropertyChanging();
+				this._user_password = value;
+				this.SendPropertyChanged("user_password");
+				this.Onuser_passwordChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_status", DbType="TinyInt NOT NULL")]
+	public byte user_status
+	{
+		get
+		{
+			return this._user_status;
+		}
+		set
+		{
+			if ((this._user_status != value))
+			{
+				this.Onuser_statusChanging(value);
+				this.SendPropertyChanging();
+				this._user_status = value;
+				this.SendPropertyChanged("user_status");
+				this.Onuser_statusChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_desc", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+	public string user_desc
+	{
+		get
+		{
+			return this._user_desc;
+		}
+		set
+		{
+			if ((this._user_desc != value))
+			{
+				this.Onuser_descChanging(value);
+				this.SendPropertyChanging();
+				this._user_desc = value;
+				this.SendPropertyChanged("user_desc");
+				this.Onuser_descChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_crea", DbType="VarChar(50)")]
+	public string user_crea
+	{
+		get
+		{
+			return this._user_crea;
+		}
+		set
+		{
+			if ((this._user_crea != value))
+			{
+				this.Onuser_creaChanging(value);
+				this.SendPropertyChanging();
+				this._user_crea = value;
+				this.SendPropertyChanged("user_crea");
+				this.Onuser_creaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date")]
+	public System.Nullable<System.DateTime> date_crea
+	{
+		get
+		{
+			return this._date_crea;
+		}
+		set
+		{
+			if ((this._date_crea != value))
+			{
+				this.Ondate_creaChanging(value);
+				this.SendPropertyChanging();
+				this._date_crea = value;
+				this.SendPropertyChanged("date_crea");
+				this.Ondate_creaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_updt", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string user_updt
+	{
+		get
+		{
+			return this._user_updt;
+		}
+		set
+		{
+			if ((this._user_updt != value))
+			{
+				this.Onuser_updtChanging(value);
+				this.SendPropertyChanging();
+				this._user_updt = value;
+				this.SendPropertyChanged("user_updt");
+				this.Onuser_updtChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_updt", DbType="Date NOT NULL")]
+	public System.DateTime date_updt
+	{
+		get
+		{
+			return this._date_updt;
+		}
+		set
+		{
+			if ((this._date_updt != value))
+			{
+				this.Ondate_updtChanging(value);
+				this.SendPropertyChanging();
+				this._date_updt = value;
+				this.SendPropertyChanged("date_updt");
+				this.Ondate_updtChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }
@@ -170,7 +774,7 @@ public partial class tbl_customer : INotifyPropertyChanging, INotifyPropertyChan
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cus_code", DbType="NVarChar(100)")]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cus_code", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
 	public string cus_code
 	{
 		get
@@ -251,6 +855,308 @@ public partial class tbl_customer : INotifyPropertyChanging, INotifyPropertyChan
 	}
 }
 
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_service")]
+public partial class tbl_service : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _serv_id;
+	
+	private string _serv_name;
+	
+	private string _serv_name_kh;
+	
+	private string _serv_code;
+	
+	private string _serv_desc;
+	
+	private int _serv_status;
+	
+	private string _serv_type;
+	
+	private string _user_crea;
+	
+	private System.DateTime _date_crea;
+	
+	private string _user_updt;
+	
+	private System.Nullable<System.DateTime> _date_updt;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onserv_idChanging(int value);
+    partial void Onserv_idChanged();
+    partial void Onserv_nameChanging(string value);
+    partial void Onserv_nameChanged();
+    partial void Onserv_name_khChanging(string value);
+    partial void Onserv_name_khChanged();
+    partial void Onserv_codeChanging(string value);
+    partial void Onserv_codeChanged();
+    partial void Onserv_descChanging(string value);
+    partial void Onserv_descChanged();
+    partial void Onserv_statusChanging(int value);
+    partial void Onserv_statusChanged();
+    partial void Onserv_typeChanging(string value);
+    partial void Onserv_typeChanged();
+    partial void Onuser_creaChanging(string value);
+    partial void Onuser_creaChanged();
+    partial void Ondate_creaChanging(System.DateTime value);
+    partial void Ondate_creaChanged();
+    partial void Onuser_updtChanging(string value);
+    partial void Onuser_updtChanged();
+    partial void Ondate_updtChanging(System.Nullable<System.DateTime> value);
+    partial void Ondate_updtChanged();
+    #endregion
+	
+	public tbl_service()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int serv_id
+	{
+		get
+		{
+			return this._serv_id;
+		}
+		set
+		{
+			if ((this._serv_id != value))
+			{
+				this.Onserv_idChanging(value);
+				this.SendPropertyChanging();
+				this._serv_id = value;
+				this.SendPropertyChanged("serv_id");
+				this.Onserv_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_name", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+	public string serv_name
+	{
+		get
+		{
+			return this._serv_name;
+		}
+		set
+		{
+			if ((this._serv_name != value))
+			{
+				this.Onserv_nameChanging(value);
+				this.SendPropertyChanging();
+				this._serv_name = value;
+				this.SendPropertyChanged("serv_name");
+				this.Onserv_nameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_name_kh", DbType="NVarChar(250)")]
+	public string serv_name_kh
+	{
+		get
+		{
+			return this._serv_name_kh;
+		}
+		set
+		{
+			if ((this._serv_name_kh != value))
+			{
+				this.Onserv_name_khChanging(value);
+				this.SendPropertyChanging();
+				this._serv_name_kh = value;
+				this.SendPropertyChanged("serv_name_kh");
+				this.Onserv_name_khChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_code", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string serv_code
+	{
+		get
+		{
+			return this._serv_code;
+		}
+		set
+		{
+			if ((this._serv_code != value))
+			{
+				this.Onserv_codeChanging(value);
+				this.SendPropertyChanging();
+				this._serv_code = value;
+				this.SendPropertyChanged("serv_code");
+				this.Onserv_codeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_desc", DbType="NVarChar(500)")]
+	public string serv_desc
+	{
+		get
+		{
+			return this._serv_desc;
+		}
+		set
+		{
+			if ((this._serv_desc != value))
+			{
+				this.Onserv_descChanging(value);
+				this.SendPropertyChanging();
+				this._serv_desc = value;
+				this.SendPropertyChanged("serv_desc");
+				this.Onserv_descChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_status", DbType="Int NOT NULL")]
+	public int serv_status
+	{
+		get
+		{
+			return this._serv_status;
+		}
+		set
+		{
+			if ((this._serv_status != value))
+			{
+				this.Onserv_statusChanging(value);
+				this.SendPropertyChanging();
+				this._serv_status = value;
+				this.SendPropertyChanged("serv_status");
+				this.Onserv_statusChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_type", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string serv_type
+	{
+		get
+		{
+			return this._serv_type;
+		}
+		set
+		{
+			if ((this._serv_type != value))
+			{
+				this.Onserv_typeChanging(value);
+				this.SendPropertyChanging();
+				this._serv_type = value;
+				this.SendPropertyChanged("serv_type");
+				this.Onserv_typeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_crea", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+	public string user_crea
+	{
+		get
+		{
+			return this._user_crea;
+		}
+		set
+		{
+			if ((this._user_crea != value))
+			{
+				this.Onuser_creaChanging(value);
+				this.SendPropertyChanging();
+				this._user_crea = value;
+				this.SendPropertyChanged("user_crea");
+				this.Onuser_creaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date NOT NULL")]
+	public System.DateTime date_crea
+	{
+		get
+		{
+			return this._date_crea;
+		}
+		set
+		{
+			if ((this._date_crea != value))
+			{
+				this.Ondate_creaChanging(value);
+				this.SendPropertyChanging();
+				this._date_crea = value;
+				this.SendPropertyChanged("date_crea");
+				this.Ondate_creaChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_updt", DbType="NVarChar(50)")]
+	public string user_updt
+	{
+		get
+		{
+			return this._user_updt;
+		}
+		set
+		{
+			if ((this._user_updt != value))
+			{
+				this.Onuser_updtChanging(value);
+				this.SendPropertyChanging();
+				this._user_updt = value;
+				this.SendPropertyChanged("user_updt");
+				this.Onuser_updtChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_updt", DbType="Date")]
+	public System.Nullable<System.DateTime> date_updt
+	{
+		get
+		{
+			return this._date_updt;
+		}
+		set
+		{
+			if ((this._date_updt != value))
+			{
+				this.Ondate_updtChanging(value);
+				this.SendPropertyChanging();
+				this._date_updt = value;
+				this.SendPropertyChanged("date_updt");
+				this.Ondate_updtChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
 [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_ticket")]
 public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChanged
 {
@@ -259,9 +1165,9 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private int _tkt_id;
 	
-	private System.Nullable<int> _serv_id;
+	private int _serv_id;
 	
-	private System.Nullable<int> _cus_id;
+	private int _cus_id;
 	
 	private System.Nullable<int> _cnt_id;
 	
@@ -275,7 +1181,7 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private System.Nullable<System.DateTime> _tkt_hold_date;
 	
-	private string _date_crea;
+	private System.Nullable<System.DateTime> _date_crea;
 	
 	private System.Nullable<System.TimeSpan> _time_crea;
 	
@@ -285,9 +1191,9 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
     partial void OnCreated();
     partial void Ontkt_idChanging(int value);
     partial void Ontkt_idChanged();
-    partial void Onserv_idChanging(System.Nullable<int> value);
+    partial void Onserv_idChanging(int value);
     partial void Onserv_idChanged();
-    partial void Oncus_idChanging(System.Nullable<int> value);
+    partial void Oncus_idChanging(int value);
     partial void Oncus_idChanged();
     partial void Oncnt_idChanging(System.Nullable<int> value);
     partial void Oncnt_idChanged();
@@ -301,7 +1207,7 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
     partial void Onuser_creaChanged();
     partial void Ontkt_hold_dateChanging(System.Nullable<System.DateTime> value);
     partial void Ontkt_hold_dateChanged();
-    partial void Ondate_creaChanging(string value);
+    partial void Ondate_creaChanging(System.Nullable<System.DateTime> value);
     partial void Ondate_creaChanged();
     partial void Ontime_creaChanging(System.Nullable<System.TimeSpan> value);
     partial void Ontime_creaChanged();
@@ -332,8 +1238,8 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_id", DbType="Int")]
-	public System.Nullable<int> serv_id
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_id", DbType="Int NOT NULL")]
+	public int serv_id
 	{
 		get
 		{
@@ -352,8 +1258,8 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cus_id", DbType="Int")]
-	public System.Nullable<int> cus_id
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cus_id", DbType="Int NOT NULL")]
+	public int cus_id
 	{
 		get
 		{
@@ -392,7 +1298,7 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tkt_code", DbType="NVarChar(35)")]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tkt_code", DbType="NVarChar(35) NOT NULL", CanBeNull=false)]
 	public string tkt_code
 	{
 		get
@@ -492,8 +1398,8 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="NVarChar(50)")]
-	public string date_crea
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date")]
+	public System.Nullable<System.DateTime> date_crea
 	{
 		get
 		{
@@ -528,912 +1434,6 @@ public partial class tbl_ticket : INotifyPropertyChanging, INotifyPropertyChange
 				this._time_crea = value;
 				this.SendPropertyChanged("time_crea");
 				this.Ontime_creaChanged();
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_user")]
-public partial class tbl_user : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _user_id;
-	
-	private string _user_name;
-	
-	private string _user_password;
-	
-	private string _user_code;
-	
-	private byte _user_status;
-	
-	private string _user_desc;
-	
-	private string _user_crea;
-	
-	private System.DateTime _date_crea;
-	
-	private string _user_updt;
-	
-	private System.Nullable<System.DateTime> _date_updt;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onuser_idChanging(int value);
-    partial void Onuser_idChanged();
-    partial void Onuser_nameChanging(string value);
-    partial void Onuser_nameChanged();
-    partial void Onuser_passwordChanging(string value);
-    partial void Onuser_passwordChanged();
-    partial void Onuser_codeChanging(string value);
-    partial void Onuser_codeChanged();
-    partial void Onuser_statusChanging(byte value);
-    partial void Onuser_statusChanged();
-    partial void Onuser_descChanging(string value);
-    partial void Onuser_descChanged();
-    partial void Onuser_creaChanging(string value);
-    partial void Onuser_creaChanged();
-    partial void Ondate_creaChanging(System.DateTime value);
-    partial void Ondate_creaChanged();
-    partial void Onuser_updtChanging(string value);
-    partial void Onuser_updtChanged();
-    partial void Ondate_updtChanging(System.Nullable<System.DateTime> value);
-    partial void Ondate_updtChanged();
-    #endregion
-	
-	public tbl_user()
-	{
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int user_id
-	{
-		get
-		{
-			return this._user_id;
-		}
-		set
-		{
-			if ((this._user_id != value))
-			{
-				this.Onuser_idChanging(value);
-				this.SendPropertyChanging();
-				this._user_id = value;
-				this.SendPropertyChanged("user_id");
-				this.Onuser_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string user_name
-	{
-		get
-		{
-			return this._user_name;
-		}
-		set
-		{
-			if ((this._user_name != value))
-			{
-				this.Onuser_nameChanging(value);
-				this.SendPropertyChanging();
-				this._user_name = value;
-				this.SendPropertyChanged("user_name");
-				this.Onuser_nameChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_password", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-	public string user_password
-	{
-		get
-		{
-			return this._user_password;
-		}
-		set
-		{
-			if ((this._user_password != value))
-			{
-				this.Onuser_passwordChanging(value);
-				this.SendPropertyChanging();
-				this._user_password = value;
-				this.SendPropertyChanged("user_password");
-				this.Onuser_passwordChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_code", DbType="VarChar(50)")]
-	public string user_code
-	{
-		get
-		{
-			return this._user_code;
-		}
-		set
-		{
-			if ((this._user_code != value))
-			{
-				this.Onuser_codeChanging(value);
-				this.SendPropertyChanging();
-				this._user_code = value;
-				this.SendPropertyChanged("user_code");
-				this.Onuser_codeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_status", DbType="TinyInt NOT NULL")]
-	public byte user_status
-	{
-		get
-		{
-			return this._user_status;
-		}
-		set
-		{
-			if ((this._user_status != value))
-			{
-				this.Onuser_statusChanging(value);
-				this.SendPropertyChanging();
-				this._user_status = value;
-				this.SendPropertyChanged("user_status");
-				this.Onuser_statusChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_desc", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-	public string user_desc
-	{
-		get
-		{
-			return this._user_desc;
-		}
-		set
-		{
-			if ((this._user_desc != value))
-			{
-				this.Onuser_descChanging(value);
-				this.SendPropertyChanging();
-				this._user_desc = value;
-				this.SendPropertyChanged("user_desc");
-				this.Onuser_descChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_crea", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string user_crea
-	{
-		get
-		{
-			return this._user_crea;
-		}
-		set
-		{
-			if ((this._user_crea != value))
-			{
-				this.Onuser_creaChanging(value);
-				this.SendPropertyChanging();
-				this._user_crea = value;
-				this.SendPropertyChanged("user_crea");
-				this.Onuser_creaChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date NOT NULL")]
-	public System.DateTime date_crea
-	{
-		get
-		{
-			return this._date_crea;
-		}
-		set
-		{
-			if ((this._date_crea != value))
-			{
-				this.Ondate_creaChanging(value);
-				this.SendPropertyChanging();
-				this._date_crea = value;
-				this.SendPropertyChanged("date_crea");
-				this.Ondate_creaChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_updt", DbType="VarChar(50)")]
-	public string user_updt
-	{
-		get
-		{
-			return this._user_updt;
-		}
-		set
-		{
-			if ((this._user_updt != value))
-			{
-				this.Onuser_updtChanging(value);
-				this.SendPropertyChanging();
-				this._user_updt = value;
-				this.SendPropertyChanged("user_updt");
-				this.Onuser_updtChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_updt", DbType="Date")]
-	public System.Nullable<System.DateTime> date_updt
-	{
-		get
-		{
-			return this._date_updt;
-		}
-		set
-		{
-			if ((this._date_updt != value))
-			{
-				this.Ondate_updtChanging(value);
-				this.SendPropertyChanging();
-				this._date_updt = value;
-				this.SendPropertyChanged("date_updt");
-				this.Ondate_updtChanged();
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_services")]
-public partial class tbl_service : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _serv_id;
-	
-	private string _serv_name;
-	
-	private string _serv_name_kh;
-	
-	private string _serv_code;
-	
-	private string _serv_desc;
-	
-	private System.Nullable<int> _serv_status;
-	
-	private string _serv_type;
-	
-	private string _user_crea;
-	
-	private System.Nullable<System.DateTime> _date_crea;
-	
-	private string _user_updt;
-	
-	private System.Nullable<System.DateTime> _date_updt;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onserv_idChanging(int value);
-    partial void Onserv_idChanged();
-    partial void Onserv_nameChanging(string value);
-    partial void Onserv_nameChanged();
-    partial void Onserv_name_khChanging(string value);
-    partial void Onserv_name_khChanged();
-    partial void Onserv_codeChanging(string value);
-    partial void Onserv_codeChanged();
-    partial void Onserv_descChanging(string value);
-    partial void Onserv_descChanged();
-    partial void Onserv_statusChanging(System.Nullable<int> value);
-    partial void Onserv_statusChanged();
-    partial void Onserv_typeChanging(string value);
-    partial void Onserv_typeChanged();
-    partial void Onuser_creaChanging(string value);
-    partial void Onuser_creaChanged();
-    partial void Ondate_creaChanging(System.Nullable<System.DateTime> value);
-    partial void Ondate_creaChanged();
-    partial void Onuser_updtChanging(string value);
-    partial void Onuser_updtChanged();
-    partial void Ondate_updtChanging(System.Nullable<System.DateTime> value);
-    partial void Ondate_updtChanged();
-    #endregion
-	
-	public tbl_service()
-	{
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int serv_id
-	{
-		get
-		{
-			return this._serv_id;
-		}
-		set
-		{
-			if ((this._serv_id != value))
-			{
-				this.Onserv_idChanging(value);
-				this.SendPropertyChanging();
-				this._serv_id = value;
-				this.SendPropertyChanged("serv_id");
-				this.Onserv_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_name", DbType="NVarChar(250)")]
-	public string serv_name
-	{
-		get
-		{
-			return this._serv_name;
-		}
-		set
-		{
-			if ((this._serv_name != value))
-			{
-				this.Onserv_nameChanging(value);
-				this.SendPropertyChanging();
-				this._serv_name = value;
-				this.SendPropertyChanged("serv_name");
-				this.Onserv_nameChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_name_kh", DbType="NVarChar(250)")]
-	public string serv_name_kh
-	{
-		get
-		{
-			return this._serv_name_kh;
-		}
-		set
-		{
-			if ((this._serv_name_kh != value))
-			{
-				this.Onserv_name_khChanging(value);
-				this.SendPropertyChanging();
-				this._serv_name_kh = value;
-				this.SendPropertyChanged("serv_name_kh");
-				this.Onserv_name_khChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_code", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-	public string serv_code
-	{
-		get
-		{
-			return this._serv_code;
-		}
-		set
-		{
-			if ((this._serv_code != value))
-			{
-				this.Onserv_codeChanging(value);
-				this.SendPropertyChanging();
-				this._serv_code = value;
-				this.SendPropertyChanged("serv_code");
-				this.Onserv_codeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_desc", DbType="NVarChar(500)")]
-	public string serv_desc
-	{
-		get
-		{
-			return this._serv_desc;
-		}
-		set
-		{
-			if ((this._serv_desc != value))
-			{
-				this.Onserv_descChanging(value);
-				this.SendPropertyChanging();
-				this._serv_desc = value;
-				this.SendPropertyChanged("serv_desc");
-				this.Onserv_descChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_status", DbType="Int")]
-	public System.Nullable<int> serv_status
-	{
-		get
-		{
-			return this._serv_status;
-		}
-		set
-		{
-			if ((this._serv_status != value))
-			{
-				this.Onserv_statusChanging(value);
-				this.SendPropertyChanging();
-				this._serv_status = value;
-				this.SendPropertyChanged("serv_status");
-				this.Onserv_statusChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_type", DbType="NVarChar(50)")]
-	public string serv_type
-	{
-		get
-		{
-			return this._serv_type;
-		}
-		set
-		{
-			if ((this._serv_type != value))
-			{
-				this.Onserv_typeChanging(value);
-				this.SendPropertyChanging();
-				this._serv_type = value;
-				this.SendPropertyChanged("serv_type");
-				this.Onserv_typeChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_crea", DbType="NVarChar(50)")]
-	public string user_crea
-	{
-		get
-		{
-			return this._user_crea;
-		}
-		set
-		{
-			if ((this._user_crea != value))
-			{
-				this.Onuser_creaChanging(value);
-				this.SendPropertyChanging();
-				this._user_crea = value;
-				this.SendPropertyChanged("user_crea");
-				this.Onuser_creaChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date")]
-	public System.Nullable<System.DateTime> date_crea
-	{
-		get
-		{
-			return this._date_crea;
-		}
-		set
-		{
-			if ((this._date_crea != value))
-			{
-				this.Ondate_creaChanging(value);
-				this.SendPropertyChanging();
-				this._date_crea = value;
-				this.SendPropertyChanged("date_crea");
-				this.Ondate_creaChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_updt", DbType="NVarChar(50)")]
-	public string user_updt
-	{
-		get
-		{
-			return this._user_updt;
-		}
-		set
-		{
-			if ((this._user_updt != value))
-			{
-				this.Onuser_updtChanging(value);
-				this.SendPropertyChanging();
-				this._user_updt = value;
-				this.SendPropertyChanged("user_updt");
-				this.Onuser_updtChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_updt", DbType="Date")]
-	public System.Nullable<System.DateTime> date_updt
-	{
-		get
-		{
-			return this._date_updt;
-		}
-		set
-		{
-			if ((this._date_updt != value))
-			{
-				this.Ondate_updtChanging(value);
-				this.SendPropertyChanging();
-				this._date_updt = value;
-				this.SendPropertyChanged("date_updt");
-				this.Ondate_updtChanged();
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_counter")]
-public partial class tbl_counter : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _cnt_id;
-	
-	private string _user_name;
-	
-	private string _user_password;
-	
-	private int _serv_id;
-	
-	private string _cnt_no;
-	
-	private string _cnt_desc;
-	
-	private System.Nullable<int> _cnt_status;
-	
-	private string _cnt_position;
-	
-	private string _user_crea;
-	
-	private System.Nullable<System.DateTime> _date_crea;
-	
-	private string _user_updt;
-	
-	private System.Nullable<System.DateTime> _date_updt;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oncnt_idChanging(int value);
-    partial void Oncnt_idChanged();
-    partial void Onuser_nameChanging(string value);
-    partial void Onuser_nameChanged();
-    partial void Onuser_passwordChanging(string value);
-    partial void Onuser_passwordChanged();
-    partial void Onserv_idChanging(int value);
-    partial void Onserv_idChanged();
-    partial void Oncnt_noChanging(string value);
-    partial void Oncnt_noChanged();
-    partial void Oncnt_descChanging(string value);
-    partial void Oncnt_descChanged();
-    partial void Oncnt_statusChanging(System.Nullable<int> value);
-    partial void Oncnt_statusChanged();
-    partial void Oncnt_positionChanging(string value);
-    partial void Oncnt_positionChanged();
-    partial void Onuser_creaChanging(string value);
-    partial void Onuser_creaChanged();
-    partial void Ondate_creaChanging(System.Nullable<System.DateTime> value);
-    partial void Ondate_creaChanged();
-    partial void Onuser_updtChanging(string value);
-    partial void Onuser_updtChanged();
-    partial void Ondate_updtChanging(System.Nullable<System.DateTime> value);
-    partial void Ondate_updtChanged();
-    #endregion
-	
-	public tbl_counter()
-	{
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int cnt_id
-	{
-		get
-		{
-			return this._cnt_id;
-		}
-		set
-		{
-			if ((this._cnt_id != value))
-			{
-				this.Oncnt_idChanging(value);
-				this.SendPropertyChanging();
-				this._cnt_id = value;
-				this.SendPropertyChanged("cnt_id");
-				this.Oncnt_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_name", DbType="NChar(100) NOT NULL", CanBeNull=false)]
-	public string user_name
-	{
-		get
-		{
-			return this._user_name;
-		}
-		set
-		{
-			if ((this._user_name != value))
-			{
-				this.Onuser_nameChanging(value);
-				this.SendPropertyChanging();
-				this._user_name = value;
-				this.SendPropertyChanged("user_name");
-				this.Onuser_nameChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_password", DbType="NChar(50) NOT NULL", CanBeNull=false)]
-	public string user_password
-	{
-		get
-		{
-			return this._user_password;
-		}
-		set
-		{
-			if ((this._user_password != value))
-			{
-				this.Onuser_passwordChanging(value);
-				this.SendPropertyChanging();
-				this._user_password = value;
-				this.SendPropertyChanged("user_password");
-				this.Onuser_passwordChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serv_id", DbType="Int NOT NULL")]
-	public int serv_id
-	{
-		get
-		{
-			return this._serv_id;
-		}
-		set
-		{
-			if ((this._serv_id != value))
-			{
-				this.Onserv_idChanging(value);
-				this.SendPropertyChanging();
-				this._serv_id = value;
-				this.SendPropertyChanged("serv_id");
-				this.Onserv_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_no", DbType="NVarChar(10)")]
-	public string cnt_no
-	{
-		get
-		{
-			return this._cnt_no;
-		}
-		set
-		{
-			if ((this._cnt_no != value))
-			{
-				this.Oncnt_noChanging(value);
-				this.SendPropertyChanging();
-				this._cnt_no = value;
-				this.SendPropertyChanged("cnt_no");
-				this.Oncnt_noChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_desc", DbType="NVarChar(250)")]
-	public string cnt_desc
-	{
-		get
-		{
-			return this._cnt_desc;
-		}
-		set
-		{
-			if ((this._cnt_desc != value))
-			{
-				this.Oncnt_descChanging(value);
-				this.SendPropertyChanging();
-				this._cnt_desc = value;
-				this.SendPropertyChanged("cnt_desc");
-				this.Oncnt_descChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_status", DbType="Int")]
-	public System.Nullable<int> cnt_status
-	{
-		get
-		{
-			return this._cnt_status;
-		}
-		set
-		{
-			if ((this._cnt_status != value))
-			{
-				this.Oncnt_statusChanging(value);
-				this.SendPropertyChanging();
-				this._cnt_status = value;
-				this.SendPropertyChanged("cnt_status");
-				this.Oncnt_statusChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cnt_position", DbType="NVarChar(50)")]
-	public string cnt_position
-	{
-		get
-		{
-			return this._cnt_position;
-		}
-		set
-		{
-			if ((this._cnt_position != value))
-			{
-				this.Oncnt_positionChanging(value);
-				this.SendPropertyChanging();
-				this._cnt_position = value;
-				this.SendPropertyChanged("cnt_position");
-				this.Oncnt_positionChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_crea", DbType="NVarChar(50)")]
-	public string user_crea
-	{
-		get
-		{
-			return this._user_crea;
-		}
-		set
-		{
-			if ((this._user_crea != value))
-			{
-				this.Onuser_creaChanging(value);
-				this.SendPropertyChanging();
-				this._user_crea = value;
-				this.SendPropertyChanged("user_crea");
-				this.Onuser_creaChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_crea", DbType="Date")]
-	public System.Nullable<System.DateTime> date_crea
-	{
-		get
-		{
-			return this._date_crea;
-		}
-		set
-		{
-			if ((this._date_crea != value))
-			{
-				this.Ondate_creaChanging(value);
-				this.SendPropertyChanging();
-				this._date_crea = value;
-				this.SendPropertyChanged("date_crea");
-				this.Ondate_creaChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_updt", DbType="NVarChar(50)")]
-	public string user_updt
-	{
-		get
-		{
-			return this._user_updt;
-		}
-		set
-		{
-			if ((this._user_updt != value))
-			{
-				this.Onuser_updtChanging(value);
-				this.SendPropertyChanging();
-				this._user_updt = value;
-				this.SendPropertyChanged("user_updt");
-				this.Onuser_updtChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date_updt", DbType="Date")]
-	public System.Nullable<System.DateTime> date_updt
-	{
-		get
-		{
-			return this._date_updt;
-		}
-		set
-		{
-			if ((this._date_updt != value))
-			{
-				this.Ondate_updtChanging(value);
-				this.SendPropertyChanging();
-				this._date_updt = value;
-				this.SendPropertyChanged("date_updt");
-				this.Ondate_updtChanged();
 			}
 		}
 	}

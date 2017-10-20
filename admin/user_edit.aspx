@@ -20,15 +20,7 @@
                                      <asp:TextBox ID="txt_username" runat="server" CssClass="form-control" placeholder="Enter Username"></asp:TextBox>                                     
                                      <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txt_username" ErrorMessage="User is required" ForeColor="Red"></asp:RequiredFieldValidator>
                                  </div>
-                             </div>
-                             <div class="col-lg-4">
-                                 <div class="form-group">
-                                     <label class="control-label">User Code</label>
-                                     <asp:TextBox ID="txt_user_code" runat="server" CssClass="form-control" placeholder="Enter user code"></asp:TextBox>                                     
-                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="User code is required" ForeColor="Red" ControlToValidate="txt_user_code"></asp:RequiredFieldValidator>
-                                     <br />
-                                 </div>
-                             </div>                                                                                                                                                  
+                             </div>                                                                                                                                                                            
                               <div class="col-lg-4">
                                  <div class="form-group">
                                      <label class="control-label">Status</label>

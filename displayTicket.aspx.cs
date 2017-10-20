@@ -15,7 +15,7 @@ public partial class displayTicket : System.Web.UI.Page
             var query = (from q in dc.tbl_tickets
                          join q2 in dc.tbl_counters on q.cnt_id equals q2.cnt_id
                          where q.cnt_id != null
-                         orderby q.tkt_code descending
+                         orderby q.time_crea descending
                          select new {tkt_code = q.tkt_code,cnt_id=q.cnt_id,cnt_pos=q2.cnt_position }).Take(4).ToList();
             if(query.Count==1)
             {
@@ -33,19 +33,28 @@ public partial class displayTicket : System.Web.UI.Page
             else if (query.Count > 1)
             {
                 int i = 0;
+                ContentPlaceHolder cph = (ContentPlaceHolder)this.Master.FindControl("ContentPlaceHolder1");
+                
                 foreach (var q in query)
                 {
                     if(i==0)
                     {
                         lblTktCode.Text = q.tkt_code;
                         lblCounter.Text = "Counter " + q.cnt_id;
+                        if (q.cnt_pos == "left")
+                        {
+                            Image4.ImageUrl = "~/img/left.png";
+                        }
+                        else
+                        {
+                            Image4.ImageUrl = "~/img/right.png";
+                        }
                     }
                     else
                     {
-                        ContentPlaceHolder cph = (ContentPlaceHolder)this.Master.FindControl("ContentPlaceHolder1");
-                        Label lblTktCode = ((Label)cph.FindControl("lblTktCode"+i));
+                        Label lblTktCode = ((Label)cph.FindControl("lblTktCode" + i));
                         Label lblCounter = ((Label)cph.FindControl("lblCounter" + i));
-                        Image Image = ((Image)cph.FindControl("Image" + i));
+                        Image Image = ((Image)cph.FindControl("Image" + i));     
                         lblTktCode.Text = q.tkt_code.ToString();
                         lblCounter.Text = "Counter "+q.cnt_id.ToString();
                         if (q.cnt_pos == "left")
@@ -56,8 +65,8 @@ public partial class displayTicket : System.Web.UI.Page
                         {
                             Image.ImageUrl = "~/img/right.png";
                         }
-                        
                     }
+
                     i++;
                 }
             }

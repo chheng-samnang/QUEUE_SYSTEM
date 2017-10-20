@@ -18,18 +18,29 @@ public partial class admin_user_add : System.Web.UI.Page
         }
     }
     protected void btn_submit_Click(object sender, EventArgs e)
-    {       
+    {        
         DateTime date = DateTime.Now;
         tbl_user user = new tbl_user();
-        user.user_name = txt_username.Text;
-        user.user_code = txt_user_code.Text;        
+        user.user_name = txt_username.Text;               
         user.user_status = Convert.ToByte(ddlStatus.SelectedValue);        
-        user.user_desc = desc.Text;        
-        user.user_password = txt_password.Text;
+        user.user_desc = desc.Text;
+        user.user_password = encrypt(txt_password.Text);               
         user.user_crea = Convert.ToString(Session["userLogin"]);
         user.date_crea = date.Date;
         db.tbl_users.InsertOnSubmit(user);
         db.SubmitChanges();
         Response.Redirect("user.aspx");
+    }
+    private string encrypt(string str)
+    {
+        string _result = string.Empty;
+        char[] temp = str.ToCharArray();
+        foreach (var _singleChar in temp)
+        {
+            var i = (int)_singleChar;
+            i = i - 2;
+            _result += (char)i;
+        }
+        return _result;
     }
 }

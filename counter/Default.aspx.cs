@@ -10,13 +10,20 @@ public partial class counter_Default : System.Web.UI.Page
 {
     DataClassesDataContext dc = new DataClassesDataContext();
     string msg = "";
-    int cnt_id = 1;
+    
     protected void Page_Load(object sender, EventArgs e)
     {        
         string code = Request["code"] != null ? Request["code"] : "";
         string com = Request["com"] != null ? Request["com"] : "";
-        if (!IsPostBack)
+        Boolean isLogin = Session["counterID"] != null ? true : false;
+        if(isLogin)
         {
+            int cnt_id = int.Parse(Session["counterID"].ToString());
+        }
+        
+        if (!IsPostBack&&isLogin)
+        {
+            
             if (code == "" && com == "")
             {
                 var query = loadData();
@@ -30,7 +37,7 @@ public partial class counter_Default : System.Web.UI.Page
                     else
                     {
                         lblTktCode.Text = query.tkt_code;
-                        occupyTicket(cnt_id);
+                        occupyTicket(int.Parse(Session["counterID"].ToString()));
 
                     }
                 }
@@ -61,15 +68,16 @@ public partial class counter_Default : System.Web.UI.Page
             }
             else //when counter cancel hold ticket
             {
+                int srv_id = int.Parse(Session["serviceID"].ToString());
                 var query2 = (from q in dc.tbl_tickets
-                              where q.tkt_code == code
+                              where q.tkt_code == code && q.serv_id==srv_id
                               select q).ToList();
                 if (query2.Count > 0)
                 {
                     query2[0].tkt_status = "cancel hold";
                     dc.SubmitChanges();
                     var query3 = (from q in dc.tbl_tickets
-                                  where q.tkt_status == "occupied"
+                                  where q.tkt_status == "occupied" && q.serv_id==srv_id
                                   select q).ToList();
                     if (query3.Count > 0)
                     {
@@ -98,6 +106,7 @@ public partial class counter_Default : System.Web.UI.Page
         {
             query.cnt_id = cnt_id;
             query.tkt_status = "occupied";
+            query.time_crea = TimeSpan.Parse(DateTime.Now.ToString("h:mm:ss"));
             dc.SubmitChanges();
         }
         else
@@ -109,17 +118,18 @@ public partial class counter_Default : System.Web.UI.Page
     }
     protected dynamic loadData(string id = "")
     {
+        int srv_id = int.Parse(Session["serviceID"].ToString());
         if (id == "")
         {
             var query = (from q in dc.tbl_tickets
-                         where q.tkt_status == "pending" && q.cnt_id == null
+                         where q.tkt_status == "pending" && q.cnt_id == null && q.serv_id==srv_id
                          select q).FirstOrDefault();
             return query;
         }
         else
         {
             var query = (from q in dc.tbl_tickets
-                         where q.tkt_status == "hold"
+                         where q.tkt_status == "hold" && q.serv_id==srv_id
                          select q).FirstOrDefault();
             return query;
         }
@@ -132,6 +142,7 @@ public partial class counter_Default : System.Web.UI.Page
     }
     protected void btnComplete_Click(object sender, EventArgs e)
     {
+        int srv_id = int.Parse(Session["serviceID"].ToString());
         if(lblTktCode.Text=="0000")
         {
             msg = "There is no more ticket to call.";
@@ -139,18 +150,28 @@ public partial class counter_Default : System.Web.UI.Page
         }
         else
         {
+            Boolean isLogin = Session["counterID"] != null ? true : false;
             var query = (from q in dc.tbl_tickets
-                         where q.tkt_code == lblTktCode.Text
+                         where q.tkt_code == lblTktCode.Text && q.serv_id==srv_id
                          select q).ToList();
-            if (query != null)
+            if (query != null&&isLogin)
             {
                 query[0].tkt_status = "complete";
-                query[0].cnt_id = Convert.ToByte(Session["conterID"]);
+                query[0].cnt_id = int.Parse(Session["counterID"].ToString());
                 dc.SubmitChanges();
                 var query2 = loadData();
-                lblTktCode.Text = query2.tkt_code;
-                occupyTicket(cnt_id);
-                btnCall_Click(sender, e);
+                if(query2!=null)
+                {
+                    lblTktCode.Text = query2.tkt_code;
+                    occupyTicket(int.Parse(Session["counterID"].ToString()));
+                    btnCall_Click(sender, e);
+                }
+                else
+                {
+                    msg = "There is no more ticket to call.";
+                    lblMsg.Text = msg;
+                }
+                
             }
             else
             {
@@ -161,9 +182,10 @@ public partial class counter_Default : System.Web.UI.Page
     }
     protected void btnHold_Click(object sender, EventArgs e)
     {
+        int srv_id = int.Parse(Session["serviceID"].ToString());
         string tktCode = lblTktCode.Text;
         var query = (from q in dc.tbl_tickets
-                     where q.tkt_code == tktCode
+                     where q.tkt_code == tktCode && q.serv_id==srv_id
                      select q).ToList();
         foreach (var q in query)
         {
@@ -175,7 +197,7 @@ public partial class counter_Default : System.Web.UI.Page
         if (query2 != null)
         {
             lblTktCode.Text = query2.tkt_code;
-            occupyTicket(cnt_id);
+            occupyTicket(int.Parse(Session["counterID"].ToString()));
             btnCall_Click(sender, e);
         }
         else

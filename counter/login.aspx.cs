@@ -15,7 +15,7 @@ public partial class counter_login : System.Web.UI.Page
     protected void btn_submit_Click(object sender, EventArgs e)
     {
         var username = txt_username.Text;
-        var password = txt_password.Text;             
+        var password = encrypt(txt_password.Text);             
         if(username!="" && password !="")
         {
 
@@ -46,5 +46,17 @@ public partial class counter_login : System.Web.UI.Page
         {
              msg.Text = "Please Input Username and Password !";
         }        
+    }
+    private string encrypt(string str)
+    {
+        string _result = string.Empty;
+        char[] temp = str.ToCharArray();
+        foreach (var _singleChar in temp)
+        {
+            var i = (int)_singleChar;
+            i = i - 2;
+            _result += (char)i;
+        }
+        return _result;
     }
 }

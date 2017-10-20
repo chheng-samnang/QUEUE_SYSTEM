@@ -14,16 +14,19 @@ public partial class admin_login : System.Web.UI.Page
     }
     protected void btn_submit_Click(object sender, EventArgs e)
     {
+
         var username = txt_username.Text;
-        var password = txt_password.Text;             
-        if(username!="" && password !="")
+        var password = txt_password.Text;
+        Response.Write(encrypt(password));
+        if (username != "" && password != "")
         {
+            
             var query = from f in db.tbl_users
-                            where f.user_name == username 
-                            && f.user_password == password
-                            select f;
-            if(query.Count()>0)
-            {                
+                        where f.user_name == username
+                        && f.user_password == encrypt(password)
+                        select f;
+            if (query.Count() > 0)
+            {
                 Session["userLogin"] = username;
                 Response.Redirect("~/admin/Default.aspx");
             }
@@ -35,7 +38,19 @@ public partial class admin_login : System.Web.UI.Page
         }
         else
         {
-             msg.Text = "Please Input Username and Password !";
-        }        
+            msg.Text = "Please Input Username and Password !";
+        }
+    }
+    private string encrypt(string str)
+    {
+        string _result = string.Empty;
+        char[] temp = str.ToCharArray();
+        foreach (var _singleChar in temp)
+        {
+            var i = (int)_singleChar;
+            i = i - 2;
+            _result += (char)i;
+        }
+        return _result;
     }
 }

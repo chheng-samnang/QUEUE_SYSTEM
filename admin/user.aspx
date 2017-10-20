@@ -19,8 +19,7 @@
                     <div class="panel-heading"><i class="fa fa-user"></i> User Information</div>
                      <div class="panel-body">                        
                          <asp:GridView ID="GridView1" runat="server" CssClass="table table-triped" AutoGenerateColumns="False">
-                             <Columns>
-                                 <asp:BoundField DataField="user_code" HeaderText="Code" />
+                             <Columns>                                 
                                  <asp:BoundField DataField="user_name" HeaderText="User name" />                                 
                                  <asp:BoundField DataField="user_status" HeaderText="Status" SortExpression="user_status" DataFormatString="{0:Enable;Disable;Disable}" HtmlEncode="false"/>
                                  <asp:BoundField DataField="user_desc" HeaderText="Description" />                                 
